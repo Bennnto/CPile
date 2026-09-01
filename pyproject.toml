@@ -1,0 +1,16 @@
+[project]
+name = "stakt"
+version = "0.1.0"
+description = "Transpile type-annotated python - C, human readable C code with native performance"
+authors = [
+    {name = "bennnto",email = "ben.promkare@icloud.com"}
+]
+license = "MIT"
+requires-python = ">=3.13"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

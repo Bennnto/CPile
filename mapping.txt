@@ -1,0 +1,40 @@
+FunctionDef
+    node.name 
+    node.args.args[0].arg - > arg 1
+    node.args.args[0].annotation.id -> type annotate in argument
+    node.returns.id -> annotation type of return
+    node.body[0].Return.value -> BinOps
+
+If
+
+node.body[0].If.test.left.id -> if x 
+node.body[0].If.test.ops -> Gt() -> greater than
+node.body[0].If.test.comparators[0].value = 0
+node.body[0].If.body[0].Expr.value.func.id -> print
+node.body[0].If.body[0].Expr.value.args[0].id = x
+
+ElseIf elif x < 0 : print(1)
+
+node.body[0].If.orelse[0].If.test.left.id -> x
+node.body[0].If.orelse[0].If.test.ops[0] = LT() -> Less than
+node.body[0].If.orelse[0].If.test.comparators[0].value -> 0
+node.body[0].If.orelse[0].If.body[0].Expr.value.func.id -> print
+node.body[0].If.orelse[0].If.body[0].Expr.value.args[0].value - > 1
+
+else : print("zero")
+
+node.body[0].If.orelse[0].orelse[0].Expr.value.func.id -> print
+node.body[0].If.orelse[0].orelse[0].Expr.value.args[0].value -> "zero"
+
+While True : print("32")
+
+node.body[0].While.test.value -> True
+node.body[0].While.body[0].Expr.value.func.id -> print
+node.body[0].While.body[0].Expr.value.args[0].value -> '32' 
+
+for i in range(10): print(i)
+node.body[0].For.target.id -> i
+node.body[0].For.iter.func.id = range
+node.body[0].For.iter.args[0].value = 10
+node.body[0].For.body[0].Expr.value.func.id -> print
+node.body[0].For.body[0].Expr.value.args[0].id -> i
