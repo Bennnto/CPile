@@ -1,22 +1,28 @@
 # cpile ⚡
 
-> Transpile type-annotated Python to clean, human-readable C code with native performance.
-
-Unlike existing Python-to-C tools that generate thousands of lines of unreadable machine code, **cpile** produces C code that looks like a human developer wrote it by hand.
+✱cpile✱ python code to C code with type annotation, produces readable C code with native C performance
 
 ---
+## Support Features (0.1.0)
+1. Type Mapping : map compatible python type with c type
 
-## Features (Phase 1)
+   
+|  Python  type    |   C type         |
+|------------------|------------------|
+| int (interger)   | int32_t          |
+| str (string)     | char*            |
+| float (floating point) | double     |
+| bool (boolean)   | bool <stdbool.h> |
+| None             | void             |
 
-- ✅ **Type Mapping**: `int` $\rightarrow$ `int32_t`, `float` $\rightarrow$ `double`, `bool` $\rightarrow$ `bool`, `str` $\rightarrow$ `char*`, `None`/`void` $\rightarrow$ `void`
-- ✅ **Functions & Recursion**: Full support for typed function signatures and recursive calls (e.g., Fibonacci).
-- ✅ **Control Flow**: `if`, chained `elif`, and `else` blocks with proper C scoping and indentation.
-- ✅ **Loops**: `for` loops with `range(stop)`, `range(start, stop)`, and `range(start, stop, step)`, plus `while` loops.
-- ✅ **Variable Handling**: Smart declaration tracking so variables are declared once with their C type and reassigned cleanly.
-- ✅ **Arithmetic & Logic**: Full binary operators (`+`, `-`, `*`, `/`, `%`), comparisons (`==`, `!=`, `<`, `>`, `<=`, `>=`), and logical operators (`&&`, `||`, `!`).
+
+2. Function and Recursion : Full support for typed function signatures and recursive calls (e.g., Fibonacci).
+3. Control Flow : Full support `if`, `else`, and `elif` block with proper c scoping and indentation.
+4. Loop : Support `while` loop with condition, `for` loop with `range(n)`, `range(start, stop)` and `range(start, stop, step)` 
+5. Variable Declaration : Support variable with type declaration and tracking so variable declare once with their c type and reassigned cleanly
+6. Arithmetic Operators and Logic : Full Support Binary Operator(`+`, `-`, `*`, `\`, `%`) comparison (`>`, `<`, `<=`, `>=`, `!=`, `==`) logic (`&&`, `||`, `!`)
 
 ---
-
 ## Project Structure
 
 ```
