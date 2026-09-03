@@ -1,5 +1,5 @@
 [project]
-name = "stakt"
+name = "cpile"
 version = "0.1.0"
 description = "Transpile type-annotated python - C, human readable C code with native performance"
 authors = [
@@ -10,7 +10,12 @@ requires-python = ">=3.13"
 dependencies = [
 ]
 
+[project.scripts]
+cpile = "cpile.cli:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{include = "cpile", from = "src"}]

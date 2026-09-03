@@ -42,3 +42,16 @@ def infer_type_from_value(node: ast.Constant) -> str :
         return "double"
     else :
         return "void"
+
+def is_list_type(node):
+    if isinstance(node, ast.Subscript) and isinstance(node.value, ast.Name) and node.value.id == "list":
+        return True
+    else :
+        return False
+
+def get_list_element_type(node:ast.Subscript) -> str :
+    """ Extract the element C type from a list [...]"""
+    if isinstance(node.slice, ast.Name):
+        elem_type = node.slice.id
+        return to_c_type(elem_type)
+    raise TranspileError(f"Unspoorted list slice type : {ast.dump(node.slice)}")

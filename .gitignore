@@ -9,8 +9,8 @@ venv/
 # C compiled files
 *.o
 *.out
-*.stkt
-stakt.c
+*.cpile
+cpile.c
 test/build/
 test/fib.c
 test_out.c
