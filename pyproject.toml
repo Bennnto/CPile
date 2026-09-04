@@ -1,6 +1,6 @@
 [project]
 name = "cpile"
-version = "0.2.0"
+version = "0.2.1"
 description = "Transpile type-annotated python - C, human readable C code with native performance"
 readme = "README.md"
 authors = [
