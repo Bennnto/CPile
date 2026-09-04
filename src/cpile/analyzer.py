@@ -19,6 +19,8 @@ class Analyzer :
         self.file_name = file_name
         self.tree = ast.parse(source_code)
         self.symbol_table = {}
+        self.struct_names = set()
+
         
 
     def analyze(self):
@@ -42,6 +44,13 @@ class Analyzer :
             self.visit_while(node)
         elif isinstance(node, ast.ClassDef):
             self.visit_classdef(node)
+        elif isinstance(node, ast.Break):
+            return
+        elif isinstance(node, ast.Continue):
+            return
+        elif isinstance(node, ast.AugAssign):
+            self.visit_augassign(node)
+
 
     def visit_function(self, node: ast.FunctionDef):
         # Function name and returns type
@@ -82,6 +91,8 @@ class Analyzer :
 
     def visit_assign(self, node:ast.Assign):
         # If mutating an array element (e.g. a[i] = temp), no new variable to declare
+        if isinstance(node.targets[0], ast.Attribute):
+            return
         if isinstance(node.targets[0], ast.Subscript):
             return
 
@@ -101,6 +112,10 @@ class Analyzer :
         
         # check if it is list type ; list[]
         if is_list_type(node.annotation):
+            if isinstance(node.annotation.slice, ast.Subscript) and is_list_type(node.annotation.slice):
+                elem_c_type = get_list_element_type(node.annotation.slice)
+                self.symbol_table[var_name] = f"{elem_c_type}[][]"
+                return
             elem_c_type = get_list_element_type(node.annotation)
             self.symbol_table[var_name] = f"{elem_c_type}[]"
             return
@@ -155,6 +170,7 @@ class Analyzer :
     def visit_classdef(self, node:ast.ClassDef):
         class_name = node.name
         # Register node.name to Type map so class will recognized as a type 
+        self.struct_names.add(class_name)
         TYPE_MAP[class_name] = class_name
         # add struct definition to symbol table
         struct_fields = {}
@@ -166,3 +182,6 @@ class Analyzer :
                 struct_fields[field_name] = field_c_type
         self.symbol_table[class_name] = struct_fields
 
+
+    def visit_augassign(self, node:ast.AugAssign):
+        self.visit(node.value)

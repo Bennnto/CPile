@@ -14,6 +14,7 @@ FORMAT_MAP = {
     'double' : '%f'
 }
 
+
 class TranspileError(Exception):
     pass
 

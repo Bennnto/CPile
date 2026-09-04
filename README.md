@@ -3,13 +3,20 @@
 ✱cpile✱ python code to C code with type annotation, produces readable C code with native C performance
 
 ---
+## Installation
+
+```bash
+pip install cpile
+```
+
+---
 ## Support Features (0.2.0)
 1. Type Mapping : map compatible python type with c type
 
    
 |  Python  type    |   C type         |
 |------------------|------------------|
-| int (interger)   | int32_t          |
+| int (integer)    | int32_t          |
 | str (string)     | char*            |
 | float (floating point) | double     |
 | bool (boolean)   | bool <stdbool.h> |
@@ -18,17 +25,17 @@
 
 2. Function and Recursion : Full support for typed function signatures and recursive calls (e.g., Fibonacci).
 3. Control Flow : Full support `if`, `else`, and `elif` block with proper c scoping and indentation.
-4. Loop : Support `while` loop with condition, `for` loop with `range(n)`, `range(start, stop)` and `range(start, stop, step)` 
-5. Variable Declaration : Support variable with type declaration and tracking so variable declare once with their c type and reassigned cleanly
-6. Arithmetic Operators and Logic : Full Support Binary Operator(`+`, `-`, `*`, `\`, `%`) comparison include string comparison (`>`, `<`, `<=`, `>=`, `!=`, `==`) logic (`&&`, `||`, `!`)
-7. Struct instantiate and struct mutation support struct instance `Vector v = (Vector){10, 20};` and struct access `v.x` and struct mutating `v.x = 30`
-8. Augmented Assignment (compound assignment) support (`+=`, `-=`, `*=`, `/=`)
-9. Format string in printf `print(f"Hello {name}) -> printf("Hello %s", name)`
-10. String operation support manipulate and operate string type `len(str)`, `s1 == s2`, `s1 + s2`
-11. Pointer and pass by reference support mutating and swapping value in place
-12. Math Function support `sqrt`, `pow`, `abs`, `fabs`, `floor`, `ceil`
-13. Array and 2D Array support `int32_t myarray[2][2] = [[1, 2], [1, 2]]` or `int32_t myarray[5] = [1, 2, 3, 4, 5]`
-14. Ternary Expression : support 1 line ternary expression `max_val :int = a if a > b else b` -> `int max_val = a > b ? a : b`
+4. Loop : Support `while` loop with condition, `for` loop with `range(n)`, `range(start, stop)` and `range(start, stop, step)`, `break`, and `continue`.
+5. Variable Declaration : Support variable with type declaration and tracking so variable declare once with their c type and reassigned cleanly.
+6. Arithmetic Operators and Logic : Full Support Binary Operator(`+`, `-`, `*`, `/`, `%`) comparison include string comparison (`>`, `<`, `<=`, `>=`, `!=`, `==`) logic (`&&`, `||`, `!`).
+7. Struct instantiate and struct mutation support struct instance `Vector v = (Vector){10, 20};` and struct access `v.x` and struct mutating `v.x = 30`.
+8. Augmented Assignment (compound assignment) support (`+=`, `-=`, `*=`, `/=`).
+9. Format string in printf `print(f"Hello {name}) -> printf("Hello %s", name)`.
+10. String operation support manipulate and operate string type `len(str)`, `s1 == s2`, `s1 + s2`.
+11. Pointer and pass by reference support mutating and swapping value in place.
+12. Math Function support `sqrt`, `pow`, `abs`, `fabs`, `floor`, `ceil`.
+13. Array and 2D Array support `int32_t myarray[2][2] = [[1, 2], [1, 2]]` or `int32_t myarray[5] = [1, 2, 3, 4, 5]`.
+14. Ternary Expression : support 1 line ternary expression `max_val :int = a if a > b else b` -> `int max_val = a > b ? a : b`.
 ---
 ## Project Structure
 
@@ -95,6 +102,32 @@ int32_t fibonacci (int32_t n) {
 import cpile
 
 c_code = cpile.transpile_file("test/examples/loops.py")
+```
+
+---
+
+## Command Line Interface (CLI)
+
+`cpile` provides a command line interface to transpile and build programs directly from your terminal.
+
+### 1. Transpile Python to C
+
+```bash
+# Print generated C code directly to stdout:
+cpile transpile script.py
+
+# Save generated C code to a file:
+cpile transpile script.py -o output.c
+```
+
+### 2. Build Native Binary (Transpile + GCC Compile)
+
+```bash
+# Transpile and compile directly to an executable binary:
+cpile build script.py -o my_program
+
+# Run the compiled binary:
+./my_program
 ```
 
 ---

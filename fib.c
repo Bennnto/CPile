@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 int32_t fibonacci (int32_t n) {
   if (n <= 1) {

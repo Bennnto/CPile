@@ -309,11 +309,14 @@ class CodeGenerator:
         self.declared_var.add(var_name)
         if is_list_type(node.annotation):
             if isinstance(node.annotation.slice, ast.Subscript) and is_list_type(node.annotation.slice):
-                elem_c_type = get_list_element_type(node.annotation.slice)
-                row = len(node.value.elts)
-                col = len(node.value.elts[0].elts)
                 var_value = self.generate_expr(node.value)
-                self.emit(f"{elem_c_type} {var_name}[{row}][{col}] = {var_value};")
+                elem_c_type = get_list_element_type(node.annotation.slice)
+                if isinstance(node.value, ast.List) and len(node.value.elts) > 0 :
+                    rows = len(node.value.elts)
+                    cols = len(node.value.elts[0].elts)
+                    self.emit(f"{elem_c_type} {var_name}[{rows}][{cols}] = {var_value};")
+                else:
+                    self.emit(f"{elem_c_type} {var_name}[][] = {var_value};")
             else:
                 elem_c_type = get_list_element_type(node.annotation)
                 var_value = self.generate_expr(node.value)

@@ -1,7 +1,8 @@
 [project]
 name = "cpile"
-version = "0.1.0"
+version = "0.2.0"
 description = "Transpile type-annotated python - C, human readable C code with native performance"
+readme = "README.md"
 authors = [
     {name = "bennnto",email = "ben.promkare@icloud.com"}
 ]
